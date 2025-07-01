@@ -54,6 +54,9 @@ const Tab = ({ children, setPosition, scrollTo}) => {
     }else if (children === "Login") {
       navigate("/login");
     }
+    else if (children === "Signup") {
+      navigate("/signup");
+    }
   };
 
   return (

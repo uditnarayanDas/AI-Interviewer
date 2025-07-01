@@ -34,23 +34,23 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="h-screen overflow-hidden text-white flex items-center justify-center p-6">
-      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg bg-zinc-900 p-8 rounded-xl shadow-xl overflow-hidden">
+    <div className="h-[calc(100vh-4rem)] w-full flex items-center justify-center px-4">
+      <div className="w-full max-w-xl p-6">
         {/* Sign In Section */}
-        <h2 className="text-2xl font-bold text-center">Sign in to your account</h2>
-        <p className="text-sm text-center mt-1">
+        <h2 className="text-3xl font-bold text-center text-white">Sign in to your account</h2>
+        <p className="text-sm text-center text-zinc-400 mt-1">
           Not a member? <button className="text-violet-500 hover:underline">Sign up</button>
         </p>
 
-        <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm mb-1">Email address</label>
+            <label className="block text-sm mb-1 text-white">Email address</label>
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full p-2 bg-zinc-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 ${emailError ? 'border-red-500' : 'border-zinc-700'}`}
+              className={`w-full p-3 bg-zinc-800 border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 ${emailError ? 'border-red-500' : 'border-zinc-700'} text-white`}
             />
             {emailError && (
               <p className="text-red-500 text-sm mt-1">{emailError}</p>
@@ -58,22 +58,22 @@ export default function AuthPage() {
           </div>
 
           <div>
-            <label className="block text-sm mb-1">Password</label>
+            <label className="block text-sm mb-1 text-white">Password</label>
             <input
               type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full p-2 bg-zinc-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 ${passwordError ? 'border-red-500' : 'border-zinc-700'}`}
+              className={`w-full p-2 bg-zinc-800 border rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 ${passwordError ? 'border-red-500' : 'border-zinc-700'} text-white`}
             />
             {passwordError && (
               <p className="text-red-500 text-sm mt-1">{passwordError}</p>
             )}
           </div>
 
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center justify-between text-sm text-white">
             <label className="flex items-center gap-2">
-              <input type="checkbox" className="accent-violet-500" /> Remember me
+              <input type="checkbox" className="accent-violet-500 text-white" /> Remember me
             </label>
             <a href="#" className="text-violet-500 hover:underline">Forgot password?</a>
           </div>
@@ -93,7 +93,7 @@ export default function AuthPage() {
           <div className="flex-grow h-px bg-zinc-700"></div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 text-white">
           <button className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800">
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
             Google
