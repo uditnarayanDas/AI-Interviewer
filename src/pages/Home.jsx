@@ -8,9 +8,13 @@ import Radio, { RadioGroup } from "../components/Radio";
 import { useState } from "react";
 import { BadgePercent, Sparkle, Gem, Crown, ArrowRight } from "lucide-react";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [plan, setPlan] = useState("");
+  const navigate = useNavigate();
+
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -39,7 +43,8 @@ const Home = () => {
           wrapperClassName=""
           innerClassName="inline-block"
         >
-          <button className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition">
+          <button className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:shadow-[0_0_20px_6px_rgba(255,255,255,0.4)] transition"
+            onClick={() => navigate("/signup")}>
             Get Started
           </button>
         </Magnet>
