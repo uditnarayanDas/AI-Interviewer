@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth, Provider } from "../firebaseauthentication/config";
+
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -12,6 +15,17 @@ export default function AuthPage() {
   const isFormValid = isEmailValid && isPasswordValid;
   const navigate = useNavigate();
 
+  
+  async function signin() {
+    try{
+    await signInWithPopup( auth, Provider)
+    console.log("Sign in successful");
+    navigate("/interviewform");
+    }catch{
+      console.error("Sign in failed");
+      alert("Sign in failed. Please try again.");
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -119,7 +133,7 @@ export default function AuthPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 text-white">
-          <button className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800">
+          <button onClick={signin} className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800">
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"

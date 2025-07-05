@@ -6,6 +6,8 @@ import { AnimatePresence } from "framer-motion";
 import AuthPage from "./components/Authpage";
 import {useLocation} from "react-router-dom";
 import SignupPage from "./components/SignupPage";
+import Interviewform from "./pages/Interviewform";
+
 
 function App() {
   const Location = useLocation();
@@ -40,6 +42,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/interviewform" element={<Interviewform />} />
             {/* Add more routes as needed */}
           </Routes>
         </AnimatePresence>
