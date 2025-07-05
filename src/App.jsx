@@ -13,6 +13,16 @@ function App() {
   const Location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
+
+  if (location.pathname === "/interviewform") {
+    return (
+      <Routes>
+        <Route path="/interviewform" element={<Interviewform />} />
+      </Routes>
+    );
+  }
+
+
   return (
     <>
       {/* <div className="relative min-h-screen w-full bg-black "> */}
@@ -46,6 +56,11 @@ function App() {
             {/* Add more routes as needed */}
           </Routes>
         </AnimatePresence>
+      </div>
+      <div>
+        <Routes>
+          <Route path="/interviewform" element={<Interviewform />} />
+        </Routes>
       </div>
     </>
   );
