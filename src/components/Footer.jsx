@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
 
         {/* Right Socials */}
-        <div className="flex gap-4 justify-center ">
+        <div className="flex gap-6 justify-center ">
           <HoverIcon>
             <Twitter />
           </HoverIcon>
