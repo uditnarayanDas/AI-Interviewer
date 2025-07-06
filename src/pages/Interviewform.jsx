@@ -38,7 +38,7 @@ const InterviewForm = () => {
         transition={{ duration: 0.5 }}
         className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10 px-4 sm:px-8 py-4 flex justify-between items-center"
       >
-        <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">VOCRA</h1>
+        <h1 className="text-xl sm:text-2xl font-bold bg-white/90 bg-clip-text text-transparent">VOCRA</h1>
         <button onClick={logOut} className="text-red-400 border border-red-500/30 px-4 py-2 rounded-lg hover:bg-red-500/10 transition-all flex items-center gap-2">
           <LogOut className="w-4 h-4" /> Logout
         </button>

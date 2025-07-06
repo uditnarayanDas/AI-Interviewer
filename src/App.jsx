@@ -57,11 +57,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </div>
-      <div>
-        <Routes>
-          <Route path="/interviewform" element={<Interviewform />} />
-        </Routes>
-      </div>
+      
     </>
   );
 }
