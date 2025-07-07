@@ -11,7 +11,7 @@ import Interviewform from "./pages/Interviewform";
 
 function App() {
   const Location = useLocation();
-  const isLoginPage = location.pathname === "/login";
+  const isLoginPage = Location.pathname === "/login";
 
 
   if (location.pathname === "/interviewform") {

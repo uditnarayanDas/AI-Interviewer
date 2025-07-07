@@ -36,7 +36,7 @@ const InterviewForm = () => {
         initial={{ y: -50, opacity: 0 }} 
         animate={{ y: 0, opacity: 1 }} 
         transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10 px-4 sm:px-8 py-4 flex justify-between items-center"
+        className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10 px-4 sm:px-8 py-4 flex justify-between items-center rounded-2xl"
       >
         <h1 className="text-xl sm:text-2xl font-bold bg-white/90 bg-clip-text text-transparent">VOCRA</h1>
         <button onClick={logOut} className="text-red-400 border border-red-500/30 px-4 py-2 rounded-lg hover:bg-red-500/10 transition-all flex items-center gap-2">
@@ -69,7 +69,7 @@ const InterviewForm = () => {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-md bg-black/20 border border-white/20 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-3 rounded-md bg-black/20 border border-white/20 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
           </div>
 
@@ -82,7 +82,7 @@ const InterviewForm = () => {
               required
               value={formData.experience}
               onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-              className="w-full px-4 py-3 rounded-md bg-black/20 border border-white/20 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-3 rounded-md bg-black/20 border border-white/20 text-white placeholder:text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <option value="" disabled>Select your experience level</option>
               <option value="0-1">0-1 years</option>
