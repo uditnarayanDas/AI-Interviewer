@@ -21,7 +21,7 @@ const Home = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 1.2, ease: "easeOut" }}
-      className="flex flex-col items-center px-2 -mt-5 lg-1"
+      className="flex flex-col items-center px-2 -mt-10 sm:-mt-5 md:mt-0"
     >
       <h1 className="text-white text-3xl sm:text-4xl lg:text-6xl text-center tracking-wide leading-snug">
         Mock Today
@@ -73,14 +73,14 @@ const Home = () => {
       <div id="features" className="w-full mt-24 px-4 pt-20">
         <Second />
       </div>
-      <section id="pricing" className="mt-30 mb-10 w-full flex flex-col items-center">
-        <h2 className="text-4xl font-bold tracking-tight text-white text-center">
+      <section id="pricing" className="mt-20 mb-10 w-full flex flex-col items-center px-3">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white text-center">
           Choose Your Plan
         </h2>
-        <hr className="my-3 w-56 border-neutral-700" />
+        <hr className="my-2 sm:my-3 w-40 sm:w-56 border-neutral-700" />
 
         <RadioGroup value={plan} onChange={(e) => setPlan(e.target.value)}>
-          <div className="flex flex-col gap-4 justify-center px-4 w-full max-w-xl">
+          <div className="flex flex-col gap-3 sm:gap-4 justify-center w-full max-w-xs sm:max-w-xl">
             <Radio value="mobile">
               <Plan
                 icon={<BadgePercent />}
@@ -116,9 +116,9 @@ const Home = () => {
           </div>
         </RadioGroup>
 
-        <hr className="my-3 w-56 border-neutral-700" />
+        <hr className="my-2 sm:my-3 w-40 sm:w-56 border-neutral-700" />
 
-        <button className="flex gap-4 items-center px-6 py-3 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold shadow-[0_0_20px_6px_rgba(139,92,246,0.7)] text-lg text-white mt-4">
+        <button className="flex gap-3 items-center px-5 py-2 sm:px-6 sm:py-3 rounded-lg bg-violet-800 hover:bg-violet-700 font-semibold shadow-[0_0_20px_6px_rgba(139,92,246,0.7)] text-sm sm:text-lg text-white mt-4">
           Proceed with {plan || "your"} plan
           <ArrowRight />
         </button>

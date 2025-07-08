@@ -13,7 +13,7 @@ const Navbar = ({ onLoginClick }) => {
   });
 
   return (
-    <div className="sticky top-0 z-50 flex justify-center py-4">
+    <div className="sticky top-0 z-50 flex justify-center py-6 md:py-4">
       <ul
         onMouseLeave={() => {
           setPosition((pv) => ({
@@ -26,8 +26,8 @@ const Navbar = ({ onLoginClick }) => {
         <Tab setPosition={setPosition}>Home</Tab>
         <Tab setPosition={setPosition} scrollTo="features">Features</Tab>
         <Tab setPosition={setPosition} scrollTo="pricing" >Pricing</Tab>
-        <Tab setPosition={setPosition}>Login</Tab>
-        <Tab setPosition={setPosition}>Signup</Tab>
+        <Tab setPosition={setPosition}className="hidden md:block" >Login</Tab>
+        <Tab setPosition={setPosition} className="hidden md:block">Signup</Tab>
 
         <Cursor position={position} />
       </ul>
@@ -35,7 +35,7 @@ const Navbar = ({ onLoginClick }) => {
   );
 };
 
-const Tab = ({ children, setPosition, scrollTo}) => {
+const Tab = ({ children, setPosition, scrollTo, className="" }) => {
   const ref = useRef(null);
   const isLogin = children === "Login";
   const isSignup = children === "Signup";
@@ -72,7 +72,8 @@ const Tab = ({ children, setPosition, scrollTo}) => {
           opacity: 1,
         });
       }}
-      className={`relative z-10 block cursor-pointer rounded-full px-3 py-1.5 text-xs uppercase md:px-5 md:py-3 md:text-base transition-all
+      className={`relative z-10 block cursor-pointer rounded-full px-6 py-2 text-sm uppercase md:px-5 md:py-3 md:text-base transition-all ${className} 
+          
         ${
           isSignup
             ? "bg-white/70 text-black hover:bg-white/90 shadow-sm hover:shadow-[0_0_20px_6px_rgba(255,255,255,0.6)]"
