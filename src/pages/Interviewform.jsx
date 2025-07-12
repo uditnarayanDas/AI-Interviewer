@@ -27,6 +27,7 @@ const InterviewForm = () => {
   const navigate = useNavigate()
   async function logOut() {
     await signOut(auth)
+    localStorage.removeItem("vocra_loggedin");
     navigate("/login")
   }
   return (

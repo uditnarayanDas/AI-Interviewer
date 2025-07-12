@@ -1,32 +1,25 @@
-import React, { useState } from "react"
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 import { AnimatePresence } from "framer-motion";
 import AuthPage from "./components/Authpage";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SignupPage from "./components/SignupPage";
 import Interviewform from "./pages/Interviewform";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const Location = useLocation();
-  const isLoginPage = Location.pathname === "/login";
-
-
-  if (location.pathname === "/interviewform") {
-    return (
-      <Routes>
-        <Route path="/interviewform" element={<Interviewform />} />
-      </Routes>
-    );
-  }
-
+  const isInterviewFormPage = Location.pathname === "/interviewform";
+  const isLoginPage =
+    Location.pathname === "/login" || Location.pathname === "/signup";
 
   return (
     <>
       {/* <div className="relative min-h-screen w-full bg-black "> */}
-      {/* ✅ Background Layer */}
+      {!isInterviewFormPage && (
+        <>
       <div
         className="fixed inset-0 z-0"
         style={{
@@ -38,6 +31,8 @@ function App() {
       <div className="sticky top-0 z-20">
         <Navbar />
       </div>
+      </>
+      )}
 
       {/* ✅ Page Content */}
       <div
@@ -52,12 +47,18 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<AuthPage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/interviewform" element={<Interviewform />} />
+            <Route
+              path="/interviewform"
+              element={
+                <ProtectedRoute>
+                  <Interviewform />
+                </ProtectedRoute>
+              }
+            />
             {/* Add more routes as needed */}
           </Routes>
         </AnimatePresence>
       </div>
-      
     </>
   );
 }

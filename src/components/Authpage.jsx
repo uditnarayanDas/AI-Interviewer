@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, Provider } from "../firebaseauthentication/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -26,27 +27,48 @@ export default function AuthPage() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let valid = true;
-
-    if (!isEmailValid) {
-      setEmailError("Enter a valid email");
-      valid = false;
-    } else {
-      setEmailError("");
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/interviewform");
+    } catch (err) {
+      console.error("Login error:", err.message);
+      setError("Invalid email or password");
     }
+    // e.preventDefault();
+    // let valid = true;
 
-    if (!isPasswordValid) {
-      setPasswordError("Password must be at least 6 characters");
-      valid = false;
-    } else {
-      setPasswordError("");
-    }
+    // if (!isEmailValid) {
+    //   setEmailError("Enter a valid email");
+    //   valid = false;
+    // } else {
+    //   setEmailError("");
+    // }
 
-    if (valid) {
-      // Handle login logic here
-    }
+    // if (!isPasswordValid) {
+    //   setPasswordError("Password must be at least 6 characters");
+    //   valid = false;
+    // } else {
+    //   setPasswordError("");
+    // }
+
+    // if (valid) {
+    //   signInWithEmailAndPassword(auth, email, password)
+    //     .then(() => {
+    //       alert("Login successful!");
+    //       navigate("/interviewform");
+    //     })
+    //     .catch((error) => {
+    //       console.error("Login error:", error.message);
+    //       if (error.code === "auth/user-not-found") {
+    //         setEmailError("User not found");
+    //       } else if (error.code === "auth/wrong-password") {
+    //         setPasswordError("Incorrect password");
+    //       } else {
+    //         alert("Login failed. Please try again.");
+    //       }
+    //     });
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseauthentication/config"; // ✅ adjust path if needed
+import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
+import { auth } from "../firebaseauthentication/config"; 
 import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
@@ -8,59 +8,59 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmError, setConfirmError] = useState("");
 
-  const isEmailValid = email.includes("@",".com",".org",".net");
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isPasswordValid = password.length >= 6;
   const isConfirmValid =
     confirmPassword === password && confirmPassword.length >= 6;
   const isFormValid = name && isEmailValid && isPasswordValid && isConfirmValid;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let valid = true;
 
-    if (!isEmailValid) {
-      setEmailError("Enter a valid email");
-      valid = false;
-    } else {
-      setEmailError("");
+    if (!name || !email || !password || !confirmPassword) {
+      return setError("Please fill all fields");
+    }
+    if (password !== confirmPassword) {
+      return setError("Passwords do not match");
     }
 
-    if (!isPasswordValid) {
-      setPasswordError("Password must be at least 6 characters");
-      valid = false;
-    } else {
-      setPasswordError("");
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(userCredential.user, {
+        displayName: name,
+      });
+      alert("Account created successfully");
+      navigate("/login");
+    } catch (err) {
+      console.error("Signup error:", err.message);
+      setError(err.message);
     }
+    // Remove the duplicate block below, as the async/await block above already handles signup.
+    // If you want to keep the .then/.catch style, remove the async/await block above.
+    // if (valid) {
+    //   createUserWithEmailAndPassword(auth, email, password)
+    //     .then(() => {
+    //       alert("Account created successfully!");
+    //       navigate("/login");
+    //     })
+    //     .catch((error) => {
+    //       console.error("Signup error:", error.message);
 
-    if (!isConfirmValid) {
-      setConfirmError("Passwords do not match");
-      valid = false;
-    } else {
-      setConfirmError("");
-    }
-
-    if (valid) {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert("Account created successfully!");
-          navigate("/login");
-        })
-        .catch((error) => {
-          console.error("Signup error:", error.message);
-
-          // Optional: Show user-friendly errors
-          if (error.code === "auth/email-already-in-use") {
-            setEmailError("Email already in use");
-          } else {
-            alert("Signup failed. Please try again.");
-          }
-        });
-    }
+    //       // Optional: Show user-friendly errors
+    //       if (error.code === "auth/email-already-in-use") {
+    //         setEmailError("Email already in use");
+    //       } else {
+    //         alert("Signup failed. Please try again.");
+    //       }
+    //     });
+    // }
   };
 
   return (
