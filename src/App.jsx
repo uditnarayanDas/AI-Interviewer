@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import SignupPage from "./components/SignupPage";
 import Interviewform from "./pages/Interviewform";
 import ProtectedRoute from "./components/ProtectedRoute";
+import InterviewPage from "./pages/InterviewPage";
 
 function App() {
   const Location = useLocation();
@@ -20,24 +21,26 @@ function App() {
       {/* <div className="relative min-h-screen w-full bg-black "> */}
       {!isInterviewFormPage && (
         <>
-      <div
-        className="fixed inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226, 232, 240, 0.15), transparent 70%), #000000",
-        }}
-      />
+          <div
+            className="fixed inset-0 z-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226, 232, 240, 0.15), transparent 70%), #000000",
+            }}
+          />
 
-      <div className="sticky top-0 z-20">
-        <Navbar />
-      </div>
-      </>
+          <div className="sticky top-0 z-20">
+            <Navbar />
+          </div>
+        </>
       )}
 
       {/* ✅ Page Content */}
       <div
         className={
-          isLoginPage
+          isInterviewFormPage
+            ? "min-h-screen w-full bg-black flex items-center justify-center"
+            : isLoginPage
             ? "relative z-10 h-[calc(100vh-4rem)] overflow-hidden flex items-center justify-center px-6 sm:px-10"
             : "relative z-10 max-w-7xl mx-auto pt-28 px-6 pb-20"
         }
@@ -52,6 +55,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Interviewform />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/interview"
+              element={
+                <ProtectedRoute>
+                  <InterviewPage />
                 </ProtectedRoute>
               }
             />

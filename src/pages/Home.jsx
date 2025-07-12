@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import video1 from "../assets/video1.mp4";
 import video2 from "../assets/video1.mp4";
-import SpotlightWrapper from "./SpotlightWrapper";
 import { Second } from "./Second";
 import Magnet from "../components/Magnet";
 import Radio, { RadioGroup } from "../components/Radio";
