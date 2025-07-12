@@ -44,7 +44,7 @@ const Home = () => {
           innerClassName="inline-block"
         >
           <button className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:shadow-[0_0_20px_6px_rgba(255,255,255,0.4)] transition"
-            onClick={() => navigate("/signup")}>
+            onClick={() => navigate("/login")}>
             Get Started
           </button>
         </Magnet>

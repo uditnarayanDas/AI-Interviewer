@@ -2,7 +2,7 @@ import { signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, Provider } from "../firebaseauthentication/config";
-
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -15,13 +15,12 @@ export default function AuthPage() {
   const isFormValid = isEmailValid && isPasswordValid;
   const navigate = useNavigate();
 
-  
   async function signin() {
-    try{
-    await signInWithPopup( auth, Provider)
-    console.log("Sign in successful");
-    navigate("/interviewform");
-    }catch{
+    try {
+      await signInWithPopup(auth, Provider);
+      console.log("Sign in successful");
+      navigate("/interviewform");
+    } catch {
       console.error("Sign in failed");
       alert("Sign in failed. Please try again.");
     }
@@ -51,10 +50,9 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-4rem)] w-full flex items-center justify-center px-4">
+    <div className="w-full min-h-screen flex items-start justify-center px-2 pt-20 sm:pt-12md:pt-20">
       <div className="w-full max-w-xl p-6">
-        {/* Sign In Section */}
-        <h2 className="text-3xl font-bold text-center text-white">
+        <h2 className="text-3xl font-bold text-center text-white whitespace-nowrap">
           Sign in to your account
         </h2>
         <p className="text-sm text-center text-zinc-400 mt-1">
@@ -63,7 +61,6 @@ export default function AuthPage() {
             className="text-violet-500 hover:underline"
             onClick={() => navigate("/signup")}
           >
-            
             Sign up
           </button>
         </p>
@@ -133,7 +130,10 @@ export default function AuthPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 text-white">
-          <button onClick={signin} className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800">
+          <button
+            onClick={signin}
+            className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800"
+          >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"
