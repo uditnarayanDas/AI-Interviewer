@@ -20,7 +20,9 @@ export default function AuthPage() {
     try {
       await signInWithPopup(auth, Provider);
       console.log("Sign in successful");
-      navigate("/interviewform");
+      const username = responseFromServer.username; // or from form field
+      localStorage.setItem("vocra_username", username);
+      navigate("/dashboard");
     } catch {
       console.error("Sign in failed");
       alert("Sign in failed. Please try again.");
@@ -31,7 +33,7 @@ export default function AuthPage() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/interviewform");
+      navigate("/dashboard");
     } catch (err) {
       console.error("Login error:", err.message);
       setError("Invalid email or password");

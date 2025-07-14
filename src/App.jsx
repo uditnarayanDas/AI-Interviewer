@@ -9,17 +9,20 @@ import SignupPage from "./components/SignupPage";
 import Interviewform from "./pages/Interviewform";
 import ProtectedRoute from "./components/ProtectedRoute";
 import InterviewPage from "./pages/InterviewPage";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const Location = useLocation();
   const isInterviewFormPage = Location.pathname === "/interviewform";
+  const isdashboard = Location.pathname === "/dashboard";
+  
   const isLoginPage =
     Location.pathname === "/login" || Location.pathname === "/signup";
 
   return (
     <>
-      {/* <div className="relative min-h-screen w-full bg-black "> */}
-      {!isInterviewFormPage && (
+      
+      {!(isInterviewFormPage || isdashboard) && (
         <>
           <div
             className="fixed inset-0 z-0"
@@ -35,11 +38,12 @@ function App() {
         </>
       )}
 
-      {/* ✅ Page Content */}
+      
       <div
         className={
-          isInterviewFormPage
-            ? "min-h-screen w-full bg-black flex items-center justify-center"
+          
+          isdashboard 
+            ? "min-h-screen w-full bg-black"
             : isLoginPage
             ? "relative z-10 h-[calc(100vh-4rem)] overflow-hidden flex items-center justify-center px-6 sm:px-10"
             : "relative z-10 max-w-7xl mx-auto pt-28 px-6 pb-20"
@@ -66,6 +70,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            
             {/* Add more routes as needed */}
           </Routes>
         </AnimatePresence>
