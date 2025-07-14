@@ -84,8 +84,8 @@ const Home = () => {
               <Plan
                 icon={<BadgePercent />}
                 title="Mobile"
-                features={["SD(480p)", "Mobile", "Ads"]}
-                price={149}
+                features={["Mobile", "Ads"]}
+                price={0}
               />
             </Radio>
             <Radio value="basic">
@@ -93,7 +93,7 @@ const Home = () => {
                 icon={<Sparkle />}
                 title="Basic"
                 features={["HD(720p)", "1 Device"]}
-                price={199}
+                price={0}
               />
             </Radio>
             <Radio value="standard">
