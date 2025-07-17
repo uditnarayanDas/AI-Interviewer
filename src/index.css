@@ -3,9 +3,7 @@
 
 
 /* make the background grey */
-html{
-    scroll-behavior: smooth;
-}
+
 
 *::-webkit-scrollbar {
   display: none;
@@ -14,4 +12,9 @@ html{
 * {
   -ms-overflow-style: none;  
   scrollbar-width: none;    
+}
+
+html, body {
+  scroll-behavior: smooth;
+  @apply bg-[#0f0f0f] text-white min-h-screen;
 }

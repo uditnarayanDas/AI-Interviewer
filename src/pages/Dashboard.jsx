@@ -31,10 +31,10 @@ const Dashboard = () => {
   ];
 
   const quickLinks = [
-    { label: "New Interview", icon: <Sun />, href: "/interview" },
-    { label: "Feedback", icon: <BookOpen />, href: "/feedback" },
-    { label: "Resources", icon: <BookOpen />, href: "/resources" },
-    { label: "Settings", icon: <User />, href: "/settings" },
+    { label: "New Interview", icon: <Sun />, href: "/dashboard/interviewform" },
+    { label: "Feedback", icon: <BookOpen />, href: "/dashboard/feedback" },
+    { label: "Resources", icon: <BookOpen />, href: "/dashboard/resources" },
+    { label: "Settings", icon: <User />, href: "/dashboard/settings" },
   ];
 
   const handleLogout = async () => {

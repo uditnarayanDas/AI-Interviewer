@@ -8,13 +8,13 @@ import { useState } from "react";
 import { BadgePercent, Sparkle, Gem, Crown, ArrowRight } from "lucide-react";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
-
 const Home = () => {
   const [plan, setPlan] = useState("");
   const navigate = useNavigate();
 
 
   return (
+    
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}

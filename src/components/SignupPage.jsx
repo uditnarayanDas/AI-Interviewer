@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 import { auth } from "../firebaseauthentication/config"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import {FaGithub} from "react-icons/fa";
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -42,138 +44,84 @@ export default function SignupPage() {
       console.error("Signup error:", err.message);
       setError(err.message);
     }
-    // Remove the duplicate block below, as the async/await block above already handles signup.
-    // If you want to keep the .then/.catch style, remove the async/await block above.
-    // if (valid) {
-    //   createUserWithEmailAndPassword(auth, email, password)
-    //     .then(() => {
-    //       alert("Account created successfully!");
-    //       navigate("/login");
-    //     })
-    //     .catch((error) => {
-    //       console.error("Signup error:", error.message);
-
-    //       // Optional: Show user-friendly errors
-    //       if (error.code === "auth/email-already-in-use") {
-    //         setEmailError("Email already in use");
-    //       } else {
-    //         alert("Signup failed. Please try again.");
-    //       }
-    //     });
-    // }
+    
   };
 
-  return (
-    <div className="w-full min-h-screen flex items-start justify-center px-2 pt-0 sm:pt-12md:pt-20">
-      <div className="w-full max-w-xl p-6">
-        <h2 className="text-3xl font-bold text-center text-white">
-          CREATE AN ACCOUNT
-        </h2>
-
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-sm mb-1 text-white">Full Name</label>
+ return (
+    <div className="w-full min-h-screen flex items-center justify-center px-4 py-10 sm:px-10 lg:px-20">
+      <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl space-y-8">
+        <div>
+          <h2 className="text-3xl font-bold text-white text-center">Create an account</h2>
+          <p className="mt-2 text-center text-sm text-gray-400">
+            Already have an account?{" "}
+            <Link to="/login" className="font-medium text-blue-500 hover:underline">
+              Sign in
+            </Link>
+          </p>
+        </div>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="rounded-md shadow-sm space-y-5">
             <input
+              name="name"
               type="text"
-              placeholder="Enter your full name"
-              value={name}
+              required
+              className="w-full px-4 py-3 lg:px-6 lg:py-4 lg:text-lg text-white bg-zinc-800 border border-zinc-700 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Full Name"
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1 text-white">
-              Email address
-            </label>
             <input
+              name="email"
               type="email"
-              placeholder="Enter your email"
-              value={email}
+              required
+              className="w-full px-4 py-3 lg:px-6 lg:py-4 lg:text-lg text-white bg-zinc-800 border border-zinc-700 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Email address"
               onChange={(e) => setEmail(e.target.value)}
-              className={`w-full p-3 bg-zinc-800 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-violet-500 ${
-                emailError ? "border-red-500" : "border-zinc-700"
-              }`}
             />
-            {emailError && (
-              <p className="text-red-500 text-sm mt-1">{emailError}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1 text-white">
-              Create Password
-            </label>
             <input
+              name="password"
               type="password"
-              placeholder="Create a password"
-              value={password}
+              required
+              className="w-full px-4 py-3 lg:px-6 lg:py-4 lg:text-lg text-white bg-zinc-800 border border-zinc-700 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Create Password"
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full p-3 bg-zinc-800 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-violet-500 ${
-                passwordError ? "border-red-500" : "border-zinc-700"
-              }`}
             />
-            {passwordError && (
-              <p className="text-red-500 text-sm mt-1">{passwordError}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1 text-white">
-              Confirm Password
-            </label>
             <input
+              name="confirmPassword"
               type="password"
-              placeholder="Confirm your password"
-              value={confirmPassword}
+              required
+              className="w-full px-4 py-3 lg:px-6 lg:py-4 lg:text-lg text-white bg-zinc-800 border border-zinc-700 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Confirm Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`w-full p-3 bg-zinc-800 border rounded-md text-white focus:outline-none focus:ring-2 focus:ring-violet-500 ${
-                confirmError ? "border-red-500" : "border-zinc-700"
-              }`}
             />
-            {confirmError && (
-              <p className="text-red-500 text-sm mt-1">{confirmError}</p>
-            )}
           </div>
 
           <button
             type="submit"
-            className={`w-full py-3 rounded-md text-white font-medium transition-colors ${
-              isFormValid
-                ? "bg-violet-600 hover:bg-violet-700"
-                : "bg-zinc-700 cursor-not-allowed"
-            }`}
-            disabled={!isFormValid}
+            className={`w-full py-3 lg:py-4 lg:text-lg rounded-md text-white font-medium transition-colors bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
           >
             Sign up
           </button>
         </form>
 
-        <div className="flex items-center my-6">
-          <div className="flex-grow h-px bg-zinc-700"></div>
-          <span className="px-4 text-sm text-zinc-400">Or continue with</span>
-          <div className="flex-grow h-px bg-zinc-700"></div>
+        <div className="flex items-center justify-center space-x-2 text-sm text-gray-400">
+          <span className="border-t border-zinc-700 w-1/5"></span>
+          <span>or sign up with</span>
+          <span className="border-t border-zinc-700 w-1/5"></span>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-white">
-          <button className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800">
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="Google"
-              className="w-5 h-5"
-            />
-            Google
+        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
+          <button className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 lg:py-3 lg:text-lg hover:bg-zinc-800 w-full">
+            <FcGoogle className="text-xl" />
+            <span className="text-white">Sign up with Google</span>
           </button>
-          <button className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 hover:bg-zinc-800">
-            <img
-              src="https://www.svgrepo.com/show/512317/github-142.svg"
-              alt="GitHub"
-              className="w-5 h-5"
-            />
-            GitHub
+          <button className="flex items-center justify-center gap-2 border border-zinc-700 rounded-md py-2 lg:py-3 lg:text-lg hover:bg-zinc-800 w-full">
+            <FaGithub className="text-xl text-white" />
+            <span className="text-white">Sign up with GitHub</span>
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+

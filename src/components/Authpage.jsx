@@ -17,60 +17,50 @@ export default function AuthPage() {
   const navigate = useNavigate();
 
   async function signin() {
-    try {
-      await signInWithPopup(auth, Provider);
-      console.log("Sign in successful");
-      const username = responseFromServer.username; // or from form field
-      localStorage.setItem("vocra_username", username);
-      navigate("/dashboard");
-    } catch {
-      console.error("Sign in failed");
-      alert("Sign in failed. Please try again.");
-    }
+  try {
+    const result = await signInWithPopup(auth, Provider);
+    const username = result.user.displayName || result.user.email || "User";
+    localStorage.setItem("vocra_username", username);
+    navigate("/dashboard");
+  } catch (err) {
+    console.error("Google sign-in failed:", err.message);
+    alert("Google sign-in failed. Please try again.");
   }
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    
+    setEmailError("");
+    setPasswordError("");
+
+    if (!isEmailValid) {
+      setEmailError("Enter a valid email");
+      return;
+    }
+    if (!isPasswordValid) {
+      setPasswordError("Password must be at least 6 characters");
+      return;
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/dashboard");
-    } catch (err) {
-      console.error("Login error:", err.message);
-      setError("Invalid email or password");
+    } catch (error) {
+      console.error("Login error:", error.message);
+
+      if (error.code === "auth/user-not-found") {
+        setEmailError("User not found. Please sign up first.");
+      } else if (error.code === "auth/wrong-password") {
+        setPasswordError("Incorrect password. Please try again.");
+      } else if (error.code === "auth/invalid-email") {
+        setEmailError("Invalid email format.");
+      } else {
+        setEmailError("Login failed. Try again.");
+        setPasswordError("");
+      }
     }
-    // e.preventDefault();
-    // let valid = true;
-
-    // if (!isEmailValid) {
-    //   setEmailError("Enter a valid email");
-    //   valid = false;
-    // } else {
-    //   setEmailError("");
-    // }
-
-    // if (!isPasswordValid) {
-    //   setPasswordError("Password must be at least 6 characters");
-    //   valid = false;
-    // } else {
-    //   setPasswordError("");
-    // }
-
-    // if (valid) {
-    //   signInWithEmailAndPassword(auth, email, password)
-    //     .then(() => {
-    //       alert("Login successful!");
-    //       navigate("/interviewform");
-    //     })
-    //     .catch((error) => {
-    //       console.error("Login error:", error.message);
-    //       if (error.code === "auth/user-not-found") {
-    //         setEmailError("User not found");
-    //       } else if (error.code === "auth/wrong-password") {
-    //         setPasswordError("Incorrect password");
-    //       } else {
-    //         alert("Login failed. Please try again.");
-    //       }
-    //     });
   };
 
   return (

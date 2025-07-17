@@ -1,28 +1,38 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./pages/Navbar";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import AuthPage from "./components/Authpage";
-import { useLocation } from "react-router-dom";
 import SignupPage from "./components/SignupPage";
 import Interviewform from "./pages/Interviewform";
 import ProtectedRoute from "./components/ProtectedRoute";
-import InterviewPage from "./pages/InterviewPage";
 import Dashboard from "./pages/Dashboard";
+import Notfound from "./pages/Notfound";
 
 function App() {
-  const Location = useLocation();
-  const isInterviewFormPage = Location.pathname === "/interviewform";
-  const isdashboard = Location.pathname === "/dashboard";
-  
-  const isLoginPage =
-    Location.pathname === "/login" || Location.pathname === "/signup";
+  const location = useLocation();
+  const pathname = location?.pathname || "";
+
+  const isInterviewFormPage = pathname.startsWith("/dashboard/interviewform");
+  const isdashboard = pathname.startsWith("/dashboard");
+
+
+  const isLoginPage = pathname === "/login" || pathname === "/signup";
+  const isNotFound = pathname === "/404" || pathname === "*";
+
+  const hideNavbar = isInterviewFormPage || isdashboard || isNotFound;
+
+  const pageTransition = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -10 },
+    transition: { duration: 0.25 },
+  };
 
   return (
     <>
-      
-      {!(isInterviewFormPage || isdashboard) && (
+      {!hideNavbar && (
         <>
           <div
             className="fixed inset-0 z-0"
@@ -31,18 +41,15 @@ function App() {
                 "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226, 232, 240, 0.15), transparent 70%), #000000",
             }}
           />
-
           <div className="sticky top-0 z-20">
             <Navbar />
           </div>
         </>
       )}
 
-      
       <div
         className={
-          
-          isdashboard 
+          isdashboard
             ? "min-h-screen w-full bg-black"
             : isLoginPage
             ? "relative z-10 h-[calc(100vh-4rem)] overflow-hidden flex items-center justify-center px-6 sm:px-10"
@@ -50,36 +57,39 @@ function App() {
         }
       >
         <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<AuthPage />} />
-            <Route path="/signup" element={<SignupPage />} />
+          <Routes location={location} key={location.pathname}>
             <Route
-              path="/interviewform"
-              element={
-                <ProtectedRoute>
-                  <Interviewform />
-                </ProtectedRoute>
-              }
+              path="/"
+              element={<motion.div ><Home /></motion.div>}
             />
             <Route
-              path="/interview"
-              element={
-                <ProtectedRoute>
-                  <InterviewPage />
-                </ProtectedRoute>
-              }
+              path="/login"
+              element={<AuthPage />}
+            />
+            <Route
+              path="/signup"
+              element={<SignupPage />}
             />
             <Route
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <motion.div ><Dashboard /></motion.div>
                 </ProtectedRoute>
               }
             />
-            
-            {/* Add more routes as needed */}
+            <Route
+              path="/dashboard/interviewform"
+              element={
+                <ProtectedRoute>
+                  <motion.div ><Interviewform /></motion.div>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="*"
+              element={<motion.div ><Notfound /></motion.div>}
+            />
           </Routes>
         </AnimatePresence>
       </div>

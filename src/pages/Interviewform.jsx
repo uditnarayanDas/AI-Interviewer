@@ -11,8 +11,11 @@ import {
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseauthentication/config";
 import { signOut } from "firebase/auth";
+import DashboardNavbar from "../components/DashboardNavbar";
 
 const InterviewForm = () => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     name: "",
     experience: "",
@@ -30,35 +33,13 @@ const InterviewForm = () => {
     e.preventDefault();
     console.log("Form Submitted:", formData);
 
-    navigate("/interview");
+    navigate("/dashboard/interview");
   };
 
-  const navigate = useNavigate();
-  async function logOut() {
-    await signOut(auth);
-    localStorage.removeItem("vocra_loggedin");
-    navigate("/login");
-  }
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-4">
-      
-      <motion.header
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 backdrop-blur bg-white/5 border-b border-white/10 px-4 sm:px-8 py-4 flex justify-between items-center rounded-2xl"
-      >
-        <h1 className="text-xl sm:text-2xl font-bold bg-white/90 bg-clip-text text-transparent">
-          VOCRA
-        </h1>
-        <button
-          onClick={logOut}
-          className="text-red-400 border border-red-500/30 px-4 py-2 rounded-lg hover:bg-red-500/10 transition-all flex items-center gap-2"
-        >
-          <LogOut className="w-4 h-4" /> Logout
-        </button>
-      </motion.header>
 
+      <DashboardNavbar showBackButton={true} />
       
       <main className="flex justify-center py-12">
         <motion.form
