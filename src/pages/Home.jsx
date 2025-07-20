@@ -80,36 +80,29 @@ const Home = () => {
 
         <RadioGroup value={plan} onChange={(e) => setPlan(e.target.value)}>
           <div className="flex flex-col gap-3 sm:gap-4 justify-center w-full max-w-xs sm:max-w-xl">
-            <Radio value="mobile">
-              <Plan
-                icon={<BadgePercent />}
-                title="Mobile"
-                features={["Mobile", "Ads"]}
-                price={0}
-              />
-            </Radio>
-            <Radio value="basic">
+            
+            <Radio value="Free">
               <Plan
                 icon={<Sparkle />}
-                title="Basic"
-                features={["HD(720p)", "1 Device"]}
+                title="Free"
+                features={["1 Interview/Month", "No AI Feedback"]}
                 price={0}
               />
             </Radio>
             <Radio value="standard">
               <Plan
                 icon={<Gem />}
-                title="Standard"
-                features={["HD(1080p)", "2 Devices"]}
-                price={499}
+                title="Pro"
+                features={["Unlimited Interview", "Detailed(Score+Tips)"]}
+                price={299}
               />
             </Radio>
             <Radio value="premium">
               <Plan
                 icon={<Crown />}
-                title="Premium"
-                features={["Ultra HD (4k) + HDR", "4 Devices"]}
-                price={649}
+                title="Elite"
+                features={["Unlimited", "Exper-Level Feedback", "Resume Review"]}
+                price={999}
               />
             </Radio>
           </div>
