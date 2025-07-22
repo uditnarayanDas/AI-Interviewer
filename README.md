@@ -50,12 +50,12 @@ Chrome or other browser with speech recognition support
 
 Installation
 
-git clone https://github.com/yourusername/vocra.git
+git clone https://github.com/uditnarayanDas/vocra.git
 cd vocra
 npm install
 npm start
 
-Then visit http://localhost:3000 to begin using Vocra.
+Then visit http://localhost:5173 to begin using Vocra.
 
 
 ---
