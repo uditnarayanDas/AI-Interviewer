@@ -1,4 +1,3 @@
-// pages/InterviewPage.jsx
 import React, { useState } from "react";
 
 export default function InterviewPage() {
@@ -11,12 +10,10 @@ export default function InterviewPage() {
   const handleSend = () => {
     if (!input.trim()) return;
 
-    // Append user's answer
     const newMessages = [...messages, { from: "user", text: input }];
     setMessages(newMessages);
     setInput("");
 
-    // Simulate AI next question (replace this with backend later)
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,

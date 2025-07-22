@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Upload,
@@ -9,8 +9,6 @@ import {
   FileText,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebaseauthentication/config";
-import { signOut } from "firebase/auth";
 import DashboardNavbar from "../components/DashboardNavbar";
 
 const InterviewForm = () => {
