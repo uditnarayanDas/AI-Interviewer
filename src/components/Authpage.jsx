@@ -10,6 +10,7 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const isEmailValid = email.includes("@");
   const isPasswordValid = password.length >= 6;
@@ -17,21 +18,24 @@ export default function AuthPage() {
   const navigate = useNavigate();
 
   async function signin() {
-  try {
-    const result = await signInWithPopup(auth, Provider);
-    const username = result.user.displayName || result.user.email || "User";
-    localStorage.setItem("vocra_username", username);
-    navigate("/dashboard");
-  } catch (err) {
-    console.error("Google sign-in failed:", err.message);
-    alert("Google sign-in failed. Please try again.");
+    if (loading) return; // Prevent multiple calls
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, Provider);
+      const username = result.user.displayName || result.user.email || "User";
+      localStorage.setItem("vocra_username", username);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Google sign-in failed:", err.message);
+      alert("Google sign-in failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     setEmailError("");
     setPasswordError("");
 

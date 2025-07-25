@@ -41,7 +41,7 @@ const Dashboard = () => {
     const auth = getAuth();
     try {
       await signOut(auth);
-      localStorage.removeItem("vocra_username"); // optional: clean local data
+      localStorage.removeItem("vocra_username"); 
       window.location.href = "/login";
     } catch (error) {
       console.error("Error signing out:", error);

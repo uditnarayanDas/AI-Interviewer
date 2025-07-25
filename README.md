@@ -1,6 +1,6 @@
 Vocra
 
-Vocra is a lightweight, fast, and intelligent voice-to-text productivity tool that helps users convert their spoken words into written text in real time. Designed for students, content creators, and busy professionals, Vocra turns your voice into clear, structured text for notes, documentation, emails, and many more.
+Vocra is a lightweight, fast, and intelligent voice-to-text productivity tool that helps users convert their spoken words into written text in real time. Designed for students, content creators, and busy professionals, Vocra turns your voice into clear, structured text for notes, documentation, emails, and more.
 
 
 ---
