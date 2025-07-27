@@ -13,7 +13,7 @@ import DashboardNavbar from "../components/DashboardNavbar";
 
 const InterviewForm = () => {
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     name: "",
     experience: "",
@@ -27,18 +27,37 @@ const InterviewForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
 
-    navigate("/dashboard/interview");
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("experience", formData.experience);
+    data.append("company", formData.company);
+    data.append("resume", formData.resume);
+
+    try {
+      const response = await fetch("http://localhost:5000/submit", {
+        method: "POST",
+        body: data,
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert("Form submitted successfully!");
+        navigate("/dashboard/interview");
+      } else {
+        alert(result.error || "Submission failed");
+      }
+    } catch (error) {
+      console.error("error submitting form:", error);
+      alert("An error occurred while submitting the form.");
+    }
   };
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-4">
-
       <DashboardNavbar showBackButton={true} />
-      
+
       <main className="flex justify-center py-12">
         <motion.form
           initial={{ opacity: 0, scale: 0.95 }}
@@ -56,7 +75,6 @@ const InterviewForm = () => {
             </p>
           </div>
 
-         
           <div className="mb-6">
             <label className="mb-2 font-medium flex items-center gap-2">
               <User className="w-4 h-4" /> Your Name{" "}
@@ -96,7 +114,6 @@ const InterviewForm = () => {
             </select>
           </div>
 
-          
           <div className="mb-6">
             <label className="mb-2 font-medium flex items-center gap-2">
               <Building2 className="w-4 h-4" /> Company You Applied
@@ -112,7 +129,6 @@ const InterviewForm = () => {
             />
           </div>
 
-          
           <div className="mb-6">
             <label className="mb-2 font-medium flex items-center gap-2">
               <FileText className="w-4 h-4" /> Upload Resume{" "}
@@ -136,7 +152,6 @@ const InterviewForm = () => {
             </div>
           </div>
 
-          
           <div>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -148,7 +163,6 @@ const InterviewForm = () => {
             </motion.button>
           </div>
 
-          
           <p className="text-center text-gray-400 text-sm mt-6">
             Ready to showcase your skills? Let’s begin!
           </p>
