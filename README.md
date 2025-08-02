@@ -62,7 +62,7 @@ Then visit http://localhost:5173 to begin using Vocra.
 
 🧪 Usage
 
-Click the mic button and start speaking. Vocra will transcribe your words in real time. You can then copy, edit, or download the transcript.
+qVocra will automatically transcribe your words in real time. You can then copy, edit, or download the transcript.
 
 
 ---
