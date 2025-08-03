@@ -9,6 +9,7 @@ import Interviewform from "./pages/Interviewform";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Notfound from "./pages/Notfound";
+import UditChat from "./pages/Uditchat";
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
 
   const isLoginPage = pathname === "/login" || pathname === "/signup";
   const isNotFound = pathname === "/404" || pathname === "*";
+  
 
   const hideNavbar = isInterviewFormPage || isdashboard || isNotFound;
 
@@ -69,6 +71,10 @@ function App() {
             <Route
               path="/signup"
               element={<SignupPage />}
+            />
+            <Route
+              path="/chat"
+              element={<UditChat />}
             />
             <Route
               path="/dashboard"
