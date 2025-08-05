@@ -25,7 +25,6 @@ export default function VocraApplication() {
   };
 
   const handleLogout = () => {
-    // You can add your auth logout logic here
     alert("Logged out!");
   };
 
